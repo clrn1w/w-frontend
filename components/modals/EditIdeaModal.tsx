@@ -12,6 +12,8 @@ import { useFileDropzone } from '@/hooks/useFileDropzone'
 import GalleryIcon from '../icons/GalleryIcon'
 import { Idea } from '@/api/common/Idea'
 import { EditIdeaRequest } from '@/api/idea/byId/types'
+import { Controller } from 'react-hook-form'
+import { defaultSidebar } from '@/constants/sidebarList'
 
 interface EditIdeaModalProps extends Omit<BaseModalProps, 'children'> {
 	idea: Idea
@@ -44,6 +46,13 @@ export default function EditIdeaModal({ idea, ...props }: EditIdeaModalProps) {
 		onDrop,
 	})
 
+	const categoryOptions = defaultSidebar
+		.filter(item => item.href.startsWith('/category/'))
+		.map(item => ({
+			label: item.title,
+			value: item.href.replace('/category/', ''),
+		}))
+
 	const {
 		control,
 		handleSubmit,
@@ -54,6 +63,7 @@ export default function EditIdeaModal({ idea, ...props }: EditIdeaModalProps) {
 			description: idea.description || '',
 			link: idea.link || '',
 			price: idea.price || '',
+			category: idea.category || '',
 		},
 	})
 
@@ -80,6 +90,7 @@ export default function EditIdeaModal({ idea, ...props }: EditIdeaModalProps) {
 					description: values.description || undefined,
 					link: values.link || undefined,
 					price: Number(values.price),
+					category: values.category,
 				}
 				await editIdeaMutation({ values: request })
 
@@ -117,7 +128,12 @@ export default function EditIdeaModal({ idea, ...props }: EditIdeaModalProps) {
 			size='md'
 			{...props}
 		>
-			<Box display='flex' gap='sm' alignItems='center'>
+			<Box
+				display='flex'
+				gap='sm'
+				alignItems='center'
+				flexDirection={{ base: 'column', md: 'row' }}
+			>
 				<Box
 					bg='secondary.gray'
 					border='1px dashed'
@@ -194,6 +210,39 @@ export default function EditIdeaModal({ idea, ...props }: EditIdeaModalProps) {
 					)}
 				</Box>
 				<Box display='flex' flexDirection='column' gap='sm' w='full'>
+					<Controller
+						name='category'
+						control={control}
+						rules={{ required: 'Выберите категорию' }}
+						render={({ field, fieldState }) => (
+							<Box>
+								<select
+									{...field}
+									style={{
+										height: '3rem',
+										borderRadius: '0.5rem',
+										border: fieldState.error
+											? '1px solid red'
+											: '1px solid #ccc',
+										width: '100%',
+										padding: '0 1rem',
+									}}
+								>
+									<option value=''>Выберите категорию</option>
+									{categoryOptions.map(option => (
+										<option key={option.value} value={option.value}>
+											{option.label}
+										</option>
+									))}
+								</select>
+								{fieldState.error && (
+									<Text color='red.500' fontSize='sm'>
+										{fieldState.error.message}
+									</Text>
+								)}
+							</Box>
+						)}
+					/>
 					<RHFInput
 						label='Название'
 						isRequired

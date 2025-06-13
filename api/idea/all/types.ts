@@ -5,6 +5,7 @@ export interface CreateIdeaRequest {
 	description?: string
 	link?: string
 	price?: number | null
+	category?: string
 }
 
 export type CreateIdeaResponse = Idea

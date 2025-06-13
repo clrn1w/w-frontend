@@ -16,7 +16,11 @@ import { SlotRecipeStyles } from '@/types/SlotRecipeStyles'
 import { sidebarSlotRecipe } from './sidebar.recipe'
 
 import NextLink from 'next/link'
-import { defaultSidebar, profileSidebar } from '@/constants/sidebarList'
+import {
+	adminSidebar,
+	defaultSidebar,
+	profileSidebar,
+} from '@/constants/sidebarList'
 
 type SidebarVariantProps = RecipeVariantProps<typeof sidebarSlotRecipe>
 
@@ -30,6 +34,8 @@ export default function Sidebar({ ref, ...props }: SidebarProps) {
 
 	const sidebarItems = profileSidebar.some(item => item.href === pathname)
 		? profileSidebar
+		: pathname.includes('/admin')
+		? adminSidebar
 		: defaultSidebar
 
 	const recipe = useSlotRecipe({ recipe: sidebarSlotRecipe })

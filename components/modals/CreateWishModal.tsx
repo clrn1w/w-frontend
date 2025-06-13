@@ -89,7 +89,12 @@ export default function CreateWishModal({
 			size='md'
 			{...props}
 		>
-			<Box display='flex' gap='sm' alignItems='center'>
+			<Box
+				display='flex'
+				gap='sm'
+				alignItems='center'
+				flexDirection={{ base: 'column', md: 'row' }}
+			>
 				<Box
 					bg='secondary.gray'
 					border='1px dashed'

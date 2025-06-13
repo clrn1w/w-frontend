@@ -13,3 +13,9 @@ export const getUserWishes = async ({ id }: Id) => {
 
 	return response
 }
+
+export const deleteUser = async ({ id }: Id) => {
+	const response = await api.delete(`user/delete/${id}`)
+
+	return response
+}

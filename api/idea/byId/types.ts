@@ -6,6 +6,7 @@ export interface EditIdeaRequest extends Id {
 	description?: string
 	link?: string
 	price?: number | null
+	category?: string
 }
 
 export interface UploadIdeaImageRequest extends Id {

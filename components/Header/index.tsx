@@ -77,7 +77,18 @@ export default function Header() {
 							<BurgerIcon />
 						</Button>
 					}
-					items={externalActionsList}
+					items={[
+						...externalActionsList,
+						...(user?.userType === 'ADMIN'
+							? [
+									{
+										text: 'Админ-панель',
+										value: 'admin',
+										href: '/admin/ideas',
+									},
+							  ]
+							: []),
+					]}
 				/>
 			) : (
 				<Button asChild>

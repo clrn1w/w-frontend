@@ -1,12 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import {
 	Box,
 	Button,
 	Container,
 	Flex,
-	Heading,
 	IconButton,
 	SimpleGrid,
 	Text,
@@ -14,23 +12,19 @@ import {
 } from '@chakra-ui/react'
 import { useIdeas } from '@/api/idea/all/queries'
 import { useDeleteIdeaMutation } from '@/api/idea/byId/mutations'
-import { Idea } from '@/api/common/Idea'
 import CreateIdeaModal from '@/components/modals/CreateIdeaModal'
 import CloseIcon from '@/components/icons/CloseIcon'
 import PencilIcon from '@/components/icons/PencilIcon'
 import EditIdeaModal from '@/components/modals/EditIdeaModal'
+import H2 from '@/components/typography/H2'
+import PlusIcon from '@/components/icons/PlusIcon'
+import H3 from '@/components/typography/H3'
 
 type OpenChangeDetails = { open: boolean }
 
 export default function AdminPage() {
 	const { data: ideas = [], refetch } = useIdeas()
 	const { mutateAsync: deleteIdea } = useDeleteIdeaMutation()
-
-	const {
-		open: isCreateOpen,
-		onOpen: onCreateOpen,
-		onClose: onCreateClose,
-	} = useDisclosure()
 
 	const handleDelete = async (id: string) => {
 		await deleteIdea({ values: { id } })
@@ -40,9 +34,13 @@ export default function AdminPage() {
 	return (
 		<Container maxW='container.xl' py={8}>
 			<Flex justify='space-between' align='center' mb={8}>
-				<Heading size='lg'>Управление идеями</Heading>
+				<H2>Управление идеями</H2>
 				<CreateIdeaModal
-					trigger={<Button colorScheme='blue'>Создать идею</Button>}
+					trigger={
+						<Button size='sm'>
+							<PlusIcon />
+						</Button>
+					}
 					onOpenChange={() => refetch()}
 				/>
 			</Flex>
@@ -58,7 +56,7 @@ export default function AdminPage() {
 						bg='secondary.gray'
 					>
 						<Flex direction='column' gap={3}>
-							<Heading size='md'>{idea.title}</Heading>
+							<H3>{idea.title}</H3>
 							<Text maxLines={3}>{idea.description}</Text>
 							{idea.price && <Text>Цена: {idea.price}</Text>}
 							{idea.link && (

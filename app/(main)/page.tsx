@@ -42,7 +42,7 @@ export default function Home() {
 				display='flex'
 				flexWrap='wrap'
 			>
-				<For each={ideas} fallback={<Text>Нет предметов</Text>}>
+				<For each={ideas}>
 					{(item, index) => (
 						<ItemCard
 							key={item.id}

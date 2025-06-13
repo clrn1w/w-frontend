@@ -63,7 +63,7 @@ export default function CategorySlugPage({
 				display='flex'
 				flexWrap='wrap'
 			>
-				<For each={categoryItems} fallback={<Text>Нет предметов</Text>}>
+				<For each={categoryItems}>
 					{(item, index) => (
 						<ItemCard
 							key={item.id}

@@ -45,3 +45,16 @@ export const profileSidebar = [
 		href: '/completed',
 	},
 ]
+
+export const adminSidebar = [
+	{
+		title: 'Идеи',
+		Icon: FireIcon,
+		href: '/admin/ideas',
+	},
+	{
+		title: 'Пользователи',
+		Icon: FireIcon,
+		href: '/admin/users',
+	},
+]
