@@ -2,7 +2,11 @@
 
 import { Box, Button, Dialog, Portal } from '@chakra-ui/react'
 import { usePathname } from 'next/navigation'
-import { defaultSidebar } from '@/constants/sidebarList'
+import {
+	defaultSidebar,
+	profileSidebar,
+	adminSidebar,
+} from '@/constants/sidebarList'
 import NextLink from 'next/link'
 import CloseIcon from '../icons/CloseIcon'
 
@@ -17,6 +21,12 @@ export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
 	const handleItemClick = () => {
 		onClose()
 	}
+
+	const sidebarItems = profileSidebar.some(item => item.href === pathname)
+		? profileSidebar
+		: pathname.includes('/admin')
+		? adminSidebar
+		: defaultSidebar
 
 	return (
 		<Dialog.Root open={isOpen} onOpenChange={onClose}>
@@ -48,7 +58,7 @@ export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
 							</Dialog.CloseTrigger>
 						</Box>
 						<Box display='flex' flexDirection='column' gap='1.6rem'>
-							{defaultSidebar.map(({ title, href, Icon }, idx) => (
+							{sidebarItems.map(({ title, href, Icon }, idx) => (
 								<Button
 									key={idx}
 									asChild
