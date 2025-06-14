@@ -35,7 +35,7 @@ export default function ProfilePage() {
 				displayName={user?.displayName || 'Незнакомец'}
 				isOwn
 			/>
-			<WishesSection wishes={wishes || []} isOwn />
+			<WishesSection wishes={wishes?.filter(x => !x.isCompleted) || []} isOwn />
 		</Box>
 	)
 }

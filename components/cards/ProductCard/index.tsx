@@ -20,13 +20,6 @@ export default function ProductCard({
 	isIdea = false,
 	isOwn = false,
 }: ProductCardProps) {
-	
-
-
-	
-
-	
-
 	return (
 		<CardWrapper
 			display='flex'

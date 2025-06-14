@@ -54,7 +54,10 @@ export default function ProfileSlugPage({
 				displayName={user?.displayName || 'Незнакомец'}
 				isOwn={me?.id === user?.id}
 			/>
-			<WishesSection wishes={wishes || []} isOwn={me?.id === user?.id} />
+			<WishesSection
+				wishes={wishes?.filter(x => !x.isCompleted) || []}
+				isOwn={me?.id === user?.id}
+			/>
 		</Box>
 	)
 }

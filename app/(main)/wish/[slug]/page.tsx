@@ -146,13 +146,15 @@ export default function WishSlugPage({
 							justifyContent='space-between'
 							alignItems='center'
 						>
-							{item.price && (
+							{item.price && item.price > 0 ? (
 								<Box>
 									<Text color='secondary.white' textStyle='signature'>
 										Цена:
 									</Text>
 									<H3>{item.price} ₽</H3>
 								</Box>
+							) : (
+								<Box></Box>
 							)}
 							{item.link && (
 								<Button asChild variant='subtle'>

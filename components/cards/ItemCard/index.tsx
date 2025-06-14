@@ -33,7 +33,7 @@ export default function ItemCard({ image, title, price, url }: ItemCard) {
 					<Box css={styles.image} aspectRatio={9 / 16} />
 				)}
 				<Text css={styles.title}>{title}</Text>
-				<Text css={styles.price}>{price} ₽</Text>
+				{price > 0 ? <Text css={styles.price}>{price} ₽</Text> : ''}
 			</NextLink>
 		</Box>
 	)

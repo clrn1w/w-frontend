@@ -5,7 +5,6 @@ import React from 'react'
 import NextLink from 'next/link'
 import ArrowIcon from '@/components/icons/ArrowIcon'
 import H3 from '@/components/typography/H3'
-import ProductCard from '@/components/cards/ProductCard'
 import { useIdea } from '@/api/idea/byId/queries'
 import CardWrapper from '@/components/cards/CardWrapper'
 import H2 from '@/components/typography/H2'
@@ -114,13 +113,15 @@ export default function IdeaSlugPage({
 							justifyContent='space-between'
 							alignItems='center'
 						>
-							{item.price && (
+							{item.price && item.price > 0 ? (
 								<Box>
 									<Text color='secondary.white' textStyle='signature'>
 										Цена:
 									</Text>
 									<H3>{item.price} ₽</H3>
 								</Box>
+							) : (
+								<Box></Box>
 							)}
 							{item.link && (
 								<Button asChild variant='subtle'>

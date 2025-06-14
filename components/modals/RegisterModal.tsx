@@ -2,7 +2,7 @@
 
 import React, { useCallback } from 'react'
 import BaseModal from './BaseModal'
-import { Box, Button, chakra, Text } from '@chakra-ui/react'
+import { Box, Button, chakra, Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -111,9 +111,14 @@ export default function RegisterModal() {
 						Зарегистрироваться
 					</Button>
 					<Text color='secondary.white' textStyle='signature'>
-						Нажимая на кнопку, вы принимаете <u>пользовательское соглашение</u>{' '}
+						Нажимая на кнопку, вы принимаете{' '}
+						<Link href='/docs/terms.pdf' textDecoration='underline'>
+							пользовательское соглашение
+						</Link>{' '}
 						и даёте согласие на обработку ваших персональных данных на условиях{' '}
-						<u>политики конфиденциальности</u>
+						<Link href='/docs/confidential.pdf' textDecoration='underline'>
+							политики конфиденциальности
+						</Link>
 					</Text>
 				</chakra.form>
 			) : (
