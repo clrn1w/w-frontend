@@ -37,10 +37,11 @@ export default function Home() {
 			</Box>
 
 			<Box
-				m={{ base: '1.6rem 0', md: '3rem 0' }}
+				m={{ base: '2.4rem 0', md: '3rem 0' }}
 				gap={{ base: '2rem 1rem', md: '1.6rem 2rem' }}
 				display='flex'
 				flexWrap='wrap'
+				justifyContent={{ base: 'space-around', md: 'flex-start' }}
 			>
 				<For each={ideas}>
 					{(item, index) => (
